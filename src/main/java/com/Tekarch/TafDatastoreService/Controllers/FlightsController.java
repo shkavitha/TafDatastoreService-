@@ -23,9 +23,9 @@ public class FlightsController {
         return new ResponseEntity<>(flightRepository.findAll(),HttpStatus.OK);
     }
 
-    @GetMapping("/{flightid}")
-    public ResponseEntity<Flights> getFlightDetails(@PathVariable Long flightid) {
-        Optional<Flights> flight = flightRepository.findById(flightid);
+    @GetMapping("/{flightId}")
+    public ResponseEntity<Flights> getFlightDetails(@PathVariable Long flightId) {
+        Optional<Flights> flight = flightRepository.findById(flightId);
         return flight.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

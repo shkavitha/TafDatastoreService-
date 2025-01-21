@@ -15,19 +15,16 @@ public class Bookings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "flight_id", nullable = false)
     private Flights flight;
 
     @Column(name = "status", nullable = false)
     private String status;
-
-    @NotNull
-    private Integer seatCount; // Added seatCount field
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
