@@ -3,6 +3,7 @@ package com.Tekarch.TafDatastoreService.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -24,6 +25,9 @@ public class Bookings {
 
     @Column(name = "status", nullable = false)
     private String status;
+
+    @NotNull
+    private Integer seatCount; // Added seatCount field
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
