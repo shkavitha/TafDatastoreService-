@@ -1,6 +1,7 @@
 package com.Tekarch.TafDatastoreService.Controllers;
 
 import com.Tekarch.TafDatastoreService.Models.Flights;
+import com.Tekarch.TafDatastoreService.Models.Users;
 import com.Tekarch.TafDatastoreService.Repositories.FlightRepository;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -24,12 +25,11 @@ public class FlightsController {
     }
 
     @GetMapping("/{flightId}")
-    public ResponseEntity<Flights> getFlightDetails(@PathVariable Long flightId) {
-        Optional<Flights> flight = flightRepository.findById(flightId);
-        return flight.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    public ResponseEntity<Optional<Flights>> getFlightDetails(@PathVariable Long flightId) {
+        Optional<Flights> flight=flightRepository.findById(flightId);
+        if (flight.isPresent()) return new ResponseEntity<>(flight, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
-
 
     @PostMapping
     public ResponseEntity<Flights> addFlight(@RequestBody Flights flight)
@@ -40,8 +40,14 @@ public class FlightsController {
     @PutMapping("/{flightid}")
     public ResponseEntity<Flights> updateFlightDetails(@PathVariable Long flightid, @RequestBody Flights flight)
     {
-        flight.setId(flightid);
-       return new ResponseEntity<>(flightRepository.save(flight),HttpStatus.OK);
+        Optional<Flights> existiflight=flightRepository.findById(flightid);
+        if(existiflight.isPresent()){
+            flight.setId(flightid);
+            return new ResponseEntity<>(flightRepository.save(flight),HttpStatus.OK);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
 
