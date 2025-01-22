@@ -20,8 +20,9 @@ configurations {
 }
 
 bootJar {
-	archiveFileName = 'TafDataStoreService.jar'
+	archiveFileName = 'TafDatastoreService.jar'
 }
+
 repositories {
 	mavenCentral()
 }
@@ -35,14 +36,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-	implementation 'mysql:mysql-connector-java:8.0.34' // Use the latest version
-
 }
-
-
-
-
 
 tasks.named('test') {
 	useJUnitPlatform()
