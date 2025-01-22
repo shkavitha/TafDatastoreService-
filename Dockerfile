@@ -5,7 +5,7 @@ FROM 522814707388.dkr.ecr.us-east-2.amazonaws.com/java-image:17-jdk-slim
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY target/TafDatastoreService.jar app.jar
+COPY build/libs/TafDataStoreService.jar app.jar
 
 # Expose the port your application will run on
 EXPOSE 8080

@@ -19,6 +19,9 @@ configurations {
 	}
 }
 
+bootJar {
+	archiveFileName = 'TafDataStoreService.jar'
+}
 repositories {
 	mavenCentral()
 }
